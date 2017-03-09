@@ -102,4 +102,5 @@
             </column>
         </createTable>
     </changeSet>
+
 </databaseChangeLog>

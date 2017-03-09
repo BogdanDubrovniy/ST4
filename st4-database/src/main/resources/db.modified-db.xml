@@ -50,4 +50,5 @@
                                  referencedColumnNames="card_id"
                                  referencedTableName="card"/>
     </changeSet>
+
 </databaseChangeLog>
