@@ -4,14 +4,50 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <changeSet id="1" author="Bohdan Dubrovnyi">
-        <createTable tableName="person">
-            <column name="id" type="VARCHAR(32)">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-            <column name="name" type="VARCHAR(20)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
+
+    <changeSet author="Bohdan Dubrovnyi" id="references">
+        <addForeignKeyConstraint baseColumnNames="id_role"
+                                 baseTableName="users"
+                                 constraintName="fk_users_roles"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="roles_id"
+                                 referencedTableName="roles"/>
+
+        <addForeignKeyConstraint baseColumnNames="id_status"
+                                 baseTableName="payment"
+                                 constraintName="fk_payment_statuses"
+                                 referencedColumnNames="statuses_id"
+                                 referencedTableName="statuses"/>
+
+        <addForeignKeyConstraint baseColumnNames="id_account"
+                                 baseTableName="card"
+                                 constraintName="fk_card_accounts"
+                                 referencedColumnNames="accounts_id"
+                                 referencedTableName="accounts"/>
+
+        <addForeignKeyConstraint baseColumnNames="id_account"
+                                 baseTableName="accounts_payment"
+                                 constraintName="fk_accounts_payment-accounts"
+                                 referencedColumnNames="accounts_id"
+                                 referencedTableName="accounts"/>
+
+        <addForeignKeyConstraint baseColumnNames="id_payment"
+                                 baseTableName="accounts_payment"
+                                 constraintName="fk_accounts_payment-payment"
+                                 referencedColumnNames="payment_id"
+                                 referencedTableName="payment"/>
+
+        <addForeignKeyConstraint baseColumnNames="id_user"
+                                 baseTableName="users_card"
+                                 constraintName="fk_users_card-users"
+                                 referencedColumnNames="users_id"
+                                 referencedTableName="users"/>
+
+        <addForeignKeyConstraint baseColumnNames="id_card"
+                                 baseTableName="users_card"
+                                 constraintName="fk_users_card-card"
+                                 referencedColumnNames="card_id"
+                                 referencedTableName="card"/>
     </changeSet>
 </databaseChangeLog>
