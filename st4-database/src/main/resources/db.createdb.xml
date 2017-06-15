@@ -61,8 +61,8 @@
         </createTable>
 
         <createTable tableName="accounts">
-            <column name="accounts_id" type="INTEGER">
-                <constraints nullable="false" unique="true" primaryKey="true"/>
+            <column name="accounts_id" type="INTEGER" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="accounts_name" type="VARCHAR(17)">
                 <constraints nullable="false"/>
