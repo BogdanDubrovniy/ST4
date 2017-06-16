@@ -13,11 +13,9 @@
     <!-- included modules -->
     <modules>
         <module>st4-database</module>
-        <module>st4-spring</module>
+        <module>st4-web-spring-hibernate</module>
+        <module>st4-pure-hibernate</module>
     </modules>
-
-    <dependencies>
-    </dependencies>
 
     <build>
         <finalName>ST4</finalName>
