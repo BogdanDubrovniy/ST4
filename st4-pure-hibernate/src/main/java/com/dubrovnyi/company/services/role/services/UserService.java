@@ -1,9 +1,9 @@
-package com.dubrovnyi.company.services;
+package com.dubrovnyi.company.services.role.services;
 
 import com.dubrovnyi.company.beans.Account;
+import com.dubrovnyi.company.beans.CreditCard;
 import com.dubrovnyi.company.beans.Payment;
 
-import javax.smartcardio.Card;
 import java.sql.Date;
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface UserService {
 
-    public List<Card> getUserCardsUserLogin(String userLogin);
+    public List<CreditCard> getUserCardsByUserLogin(String userLogin);
 
     /**
      * Gets list user payment by user login between two dates, included them

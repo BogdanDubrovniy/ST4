@@ -2,12 +2,11 @@ package com.dubrovnyi.company.daos;
 
 import com.dubrovnyi.company.beans.Account;
 import com.dubrovnyi.company.beans.CreditCard;
+import com.dubrovnyi.company.services.session.factory.SessionFactoryService;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.cfg.Configuration;
 
 /**
  * Created by Bohdan on 16.06.2017.
@@ -22,8 +21,7 @@ class DAOHandler {
     private Transaction transaction;
 
     private DAOHandler() {
-        Configuration configuration = new AnnotationConfiguration().configure();
-        sessionFactory = configuration.buildSessionFactory();
+        sessionFactory = SessionFactoryService.getSessionFactoryInstance();
     }
 
     static DAOHandler getInstanceHandler() {
@@ -53,6 +51,16 @@ class DAOHandler {
         session.close();
         LOG.info("getObjectById() is successful");
         return objectFromDB;
+    }
+
+    void updateObject(Object objectToUpdate) {
+        session = sessionFactory.openSession();
+        transaction = session.beginTransaction();
+
+        session.update(objectToUpdate);
+
+        transaction.commit();
+        session.close();
     }
 
     boolean createAccountWithCard(Account accountForCreate, CreditCard creaditCardForCreate) {

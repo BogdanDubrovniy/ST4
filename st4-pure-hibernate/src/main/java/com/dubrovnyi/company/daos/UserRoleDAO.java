@@ -12,7 +12,7 @@ public class UserRoleDAO {
         handler = DAOHandler.getInstanceHandler();
     }
 
-    public void createNewUserRole(UserRole userRole) {
+    public void createUserRole(UserRole userRole) {
         handler.createObject(userRole);
     }
 }

@@ -12,7 +12,7 @@ public class PaymentStatusDAO {
         handler = DAOHandler.getInstanceHandler();
     }
 
-    public void createNewPaymentStatus(PaymentStatus paymentStatus) {
+    public void createPaymentStatus(PaymentStatus paymentStatus) {
         handler.createObject(paymentStatus);
     }
 }
