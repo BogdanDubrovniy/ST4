@@ -13,7 +13,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "accounts_payment")
 public class AccountsPaymentLinking implements Serializable{
-    @Id
     @Column(name = "id_account", nullable = false)
     private int accountId;
 

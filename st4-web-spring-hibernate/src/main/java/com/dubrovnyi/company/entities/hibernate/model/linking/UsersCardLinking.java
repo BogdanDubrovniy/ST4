@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "users_card")
 public class UsersCardLinking implements Serializable {
-    @Id
     @Column(name = "id_user", nullable = false)
     private int userId;
 

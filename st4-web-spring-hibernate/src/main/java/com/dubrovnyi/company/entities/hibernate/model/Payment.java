@@ -12,7 +12,7 @@ import java.sql.Date;
 @Table(name = "payment")
 public class Payment implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_id")
     private int paymentId;
 
