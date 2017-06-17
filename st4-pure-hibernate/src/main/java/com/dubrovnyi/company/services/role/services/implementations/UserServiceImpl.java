@@ -4,10 +4,10 @@ import com.dubrovnyi.company.beans.Account;
 import com.dubrovnyi.company.beans.CreditCard;
 import com.dubrovnyi.company.beans.Payment;
 import com.dubrovnyi.company.daos.AccountDAO;
+import com.dubrovnyi.company.daos.PaymentDAO;
 import com.dubrovnyi.company.daos.UserDAO;
 import com.dubrovnyi.company.services.role.services.UserService;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +16,12 @@ import static com.dubrovnyi.company.constants.ConstantClass.ACCOUNT_UNBLOCK_VALU
 
 public class UserServiceImpl implements UserService {
     private AccountDAO accountDAO;
+    private PaymentDAO paymentDAO;
     private UserDAO userDAO;
 
     public UserServiceImpl() {
         accountDAO = new AccountDAO();
+        paymentDAO = new PaymentDAO();
         userDAO = new UserDAO();
     }
 
@@ -29,18 +31,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Payment> getUserPaymentsBetweenTwoDates(String userLogin, Date firstRangeDate, Date endDate) {
-        return null; // todo
+    public List<Payment> getUserPaymentsBetweenTwoDates(String userLogin,
+                                                        String firstRangeDate, String endDate) {
+        return paymentDAO.getUserPaymentsBetweenTwoDates(userLogin, firstRangeDate, endDate);
     }
 
     @Override
-    public List<Payment> getUserPaymentsAfterDate(String userLogin, Date afterDate) {
-        return null; // todo
+    public List<Payment> getUserPaymentsAfterDate(String userLogin, String afterDate) {
+        return paymentDAO.getUserPaymentsAfterDate(userLogin, afterDate);
     }
 
     @Override
-    public List<Payment> getTopNUserPaymentByPaymentAmount(String userLogin, int sizeOfReturnListOfPayments) {
-        return null; // todo
+    public List<Payment> getTopNUserPaymentByPaymentAmount(String userLogin,
+                                                           int numberOfRecords) {
+        return paymentDAO.getTopNUserPaymentByPaymentAmount(userLogin, numberOfRecords);
+    }
+
+    @Override
+    public List<Account> getSortedAccountsByMoneyAmount(String userLogin) {
+        return accountDAO.getSortedAccountsByMoneyAmount(userLogin);
     }
 
     @Override
@@ -49,11 +58,6 @@ public class UserServiceImpl implements UserService {
                 .getCreditCards();
 
         return getAccountListFromCardList(cardList);
-    }
-
-    @Override
-    public List<Account> getSortedAccountsByMoneyAmount() {
-        return null; // todo
     }
 
     @Override

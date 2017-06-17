@@ -4,9 +4,13 @@ import com.dubrovnyi.company.beans.Account;
 import com.dubrovnyi.company.beans.CreditCard;
 import com.dubrovnyi.company.services.session.factory.SessionFactoryService;
 import org.apache.log4j.Logger;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Bohdan on 16.06.2017.
@@ -86,6 +90,38 @@ class DAOHandler {
         transaction.commit();
         session.close();
         return true;
+    }
+
+    List getObjectList(String sqlQuery,
+                       String[] restrictNames,
+                       Object[] restrictParameters,
+                       Class clazz) {
+
+        List objectList;
+        session = sessionFactory.openSession();
+
+        SQLQuery query = session
+                .createSQLQuery(sqlQuery)
+                .addEntity(clazz);
+
+        boolean isRestrictsAreWrong = restrictNames == null
+                || restrictParameters == null
+                || restrictNames.length != restrictParameters.length;
+
+        if (isRestrictsAreWrong) {
+            session.close();
+            return Collections.emptyList();
+        }
+
+        for (int currentRestrictIndex = 0;
+             currentRestrictIndex < restrictNames.length; currentRestrictIndex++) {
+            query.setParameter(restrictNames[currentRestrictIndex],
+                    restrictParameters[currentRestrictIndex]);
+        }
+
+        objectList = query.list();
+        session.close();
+        return objectList;
     }
 
     /**

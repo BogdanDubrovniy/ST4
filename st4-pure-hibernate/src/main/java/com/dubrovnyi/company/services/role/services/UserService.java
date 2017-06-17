@@ -4,7 +4,6 @@ import com.dubrovnyi.company.beans.Account;
 import com.dubrovnyi.company.beans.CreditCard;
 import com.dubrovnyi.company.beans.Payment;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -18,28 +17,28 @@ public interface UserService {
      * Gets list user payment by user login between two dates, included them
      *
      * @param userLogin      current user login
-     * @param firstRangeDate for range it is first date
-     * @param endDate        and the last, end, date
+     * @param firstRangeDate for range it is first date in string format "YYYY-MM-DD"
+     * @param endDate        and the last, end, date in string format "YYYY-MM-DD"
      * @return list of payments
      */
     public List<Payment> getUserPaymentsBetweenTwoDates(String userLogin,
-                                                        Date firstRangeDate, Date endDate);
+                                                        String firstRangeDate, String endDate);
 
     /**
      * Gets list user payment by user login before the date, included it
      *
      * @param userLogin current user login
-     * @param afterDate date for payment
+     * @param afterDate date for payment in string format "YYYY-MM-DD"
      * @return list of payments
      */
-    public List<Payment> getUserPaymentsAfterDate(String userLogin, Date afterDate);
+    public List<Payment> getUserPaymentsAfterDate(String userLogin, String afterDate);
 
     public List<Payment> getTopNUserPaymentByPaymentAmount(String userLogin,
-                                                           int sizeOfReturnListOfPayments);
+                                                           int numberOfRecords);
+
+    public List<Account> getSortedAccountsByMoneyAmount(String userLogin);
 
     public List<Account> getAllAccountsByUserLogin(String userLogin);
-
-    public List<Account> getSortedAccountsByMoneyAmount();
 
     public void fillAccountAmountByAccountId(int accountId, int moneyAmountToFill);
 

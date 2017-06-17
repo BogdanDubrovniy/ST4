@@ -13,6 +13,11 @@ public class ConstantClass {
     public static final String USER_LOGIN_VALUE = "userLogin";
     public static final String USER_PASSWORD_VALUE = "userPassword";
 
+    public static final String BLOCKED_ACCOUNTS_VALUE = "blockedAccounts";
+    public static final String NUMBER_OF_RECORDS_VALUE = "numberOfRecords";
+    public static final String AFTER_DATE_VALUE = "afterDate";
+    public static final String END_DATE_VALUE = "endDate";
+
     public static final String ADMIN_ROLE_VALUE = "admin";
     public static final String CLIENT_ROLE_VALUE = "client";
 
